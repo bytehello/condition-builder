@@ -1,0 +1,21 @@
+{
+    "name": "bytehello/condition-builder",
+    "description": "build php condition code with ast",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "bytehello",
+            "email": "gechanghang@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "nikic/php-parser": "^4.9@dev"
+    },
+    "autoload": {
+        "psr-4": {
+            "ByteHello\\ConditionBuilder\\": "src"
+        }
+    }
+}
