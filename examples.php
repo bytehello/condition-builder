@@ -7,24 +7,30 @@ use ByteHello\ConditionBuilder\ConditionConfig\ConfigData;
 
 require 'vendor/autoload.php';
 
-$orConditionGroup = new OrConditionGroup();
-$orConditionGroup->addMultiple(
+$andConditionG1 = new AndConditionGroup();
+$andConditionG1->addMultiple(
     [
-        new ConfigData('Test', 'orCheck'),
-        new ConfigData('Test', 'orChec2'),
+        new ConfigData('Test', 'check1'),
+        new ConfigData('Test', 'check2'),
     ]
 );
 
-$conditionGroup = new AndConditionGroup();
-$conditionGroup->addMultiple([
-    new ConfigData('Test', 'check'),
-    new ConfigData('Test', 'check2'),
+$orConditionG1 = new OrConditionGroup();
+$orConditionG1->addMultiple(
+    [
+        new ConfigData('Test', 'check3'),
+        $andConditionG1
+    ]
+);
+
+$andConditionG2 = new AndConditionGroup();
+$andConditionG2->addMultiple([
+    new ConfigData('Test', 'check4'),
+    new ConfigData('Test', 'check5'),
+    $orConditionG1
 ]);
 
-$conditionGroup->add($orConditionGroup);
-
-$codeObj = Builder::generateCode($conditionGroup);
-$node = $codeObj->getExpr();
+$node = Builder::generateCode($andConditionG2);
 $stmts = [$node];
 $prettyPrinter = new \PhpParser\PrettyPrinter\Standard();
 echo $prettyPrinter->prettyPrint($stmts);

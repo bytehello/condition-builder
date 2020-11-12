@@ -1,6 +1,7 @@
 <?php
 namespace ByteHello\ConditionBuilder\Condition;
 
+use ByteHello\ConditionBuilder\Ast;
 use ByteHello\ConditionBuilder\Code;
 use ByteHello\ConditionBuilder\ConditionConfig\ConfigData;
 use PhpParser\BuilderFactory;
@@ -17,14 +18,13 @@ abstract class ConditionGroup
     public $parts = [];
     public $error = '';
 
-    protected $factor;
+    protected $ast;
 
     public function __construct()
     {
-        $factor = new BuilderFactory;
-        $this->factor = $factor;
-
+        $this->ast = new Ast();
     }
+
     public function addMultiple($args)
     {
         foreach ($args as $arg) {
@@ -49,40 +49,16 @@ abstract class ConditionGroup
                 $results[] = $part->getNode();
             } else {
                 try {
-                    $results[] = new Expr\MethodCall($this->factor->new($part->getClassName()), $part->getClassMethod());
+                    $results[] = $this->ast->buildExpr($part);
                 } catch (\Exception $exception) {
                     echo $exception->getMessage();
                 }
             }
         }
-
-
-        $node = $this->buildExpr($results);
+        
+        $node = $this->ast->buildConditionCode($this->operator, $results);
         return $node;
     }
 
-    protected function buildExpr($results)
-    {
-        if (!count($results)) {
-            return null;
-        }
-        if (count($results) === 1) {
-            return $results[0];
-        } elseif (count($results) === 2) {
-            $node = $this->getBinaryOperatorNode($results[0], $results[1]);
-            return $node;
-        }
-        array_shift($results);
-        return $this->getBinaryOperatorNode($results[0], $this->buildExpr($results));
-    }
-
-    protected function getBinaryOperatorNode($left, $right)
-    {
-        if ($this->operator == 'and') {
-            return new BooleanAnd($left, $right);
-        } elseif ($this->operator == 'or') {
-            return new BooleanOr($left, $right);
-        }
-    }
 
 }

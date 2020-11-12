@@ -1,6 +1,6 @@
 {
     "name": "bytehello/condition-builder",
-    "description": "build php condition code with ast",
+    "description": "build php condition code snippet with ast",
     "type": "library",
     "license": "MIT",
     "authors": [

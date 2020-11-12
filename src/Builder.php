@@ -11,6 +11,6 @@ class Builder
         if (!$node) {
             throw new ConditionBuilderException('node is null');
         }
-        return new Code($node);
+        return $node;
     }
 }
