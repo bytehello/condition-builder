@@ -1,5 +1,17 @@
-# build php condition code snippet with ast
-## usage
+## Introduction
+
+condition-builder is a library help you build condition code snippet like **(new Test())->check1() && (new Test())->check2()**
+
+## Install
+
+```
+
+composer require bytehello/condition-builder
+
+```
+
+## Usage
+
 ```
 use ByteHello\ConditionBuilder\Builder;
 use ByteHello\ConditionBuilder\Condition\AndConditionGroup;
@@ -46,3 +58,7 @@ output is
 (new Test())->check4() && ((new Test())->check5() && ((new Test())->check3() || (new Test())->check1() && (new Test())->check2()))
 
 ```
+
+## License
+
+The bytehello/condition-builder is open-source software licensed under the MIT license.
