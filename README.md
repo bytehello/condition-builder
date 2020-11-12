@@ -1,8 +1,11 @@
-## Introduction
+# Introduction
 
-condition-builder is a library help you build condition code snippet like **(new Test())->check1() && (new Test())->check2()**
+condition-builder is a library help you build condition code snippet like
+```
+(new Test())->check1() && (new Test())->check2()
+```
 
-## Install
+# Install
 
 ```
 
@@ -10,7 +13,7 @@ composer require bytehello/condition-builder
 
 ```
 
-## Usage
+# Usage
 
 ```
 use ByteHello\ConditionBuilder\Builder;
@@ -59,6 +62,6 @@ output is
 
 ```
 
-## License
+# License
 
 The bytehello/condition-builder is open-source software licensed under the MIT license.
