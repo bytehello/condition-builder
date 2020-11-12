@@ -9,13 +9,17 @@
             "email": "gechanghang@gmail.com"
         }
     ],
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "require": {
-        "nikic/php-parser": "^4.9@dev"
+        "phpunit/phpunit": "^7.0.0",
+        "nikic/php-parser": "^4.10"
     },
     "autoload": {
         "psr-4": {
             "ByteHello\\ConditionBuilder\\": "src"
         }
+    },
+    "scripts": {
+        "test": "phpunit --colors=always"
     }
 }

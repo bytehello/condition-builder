@@ -47,9 +47,7 @@ $andConditionG2->addMultiple([
 ]);
 
 $node = Builder::generateCode($andConditionG2);
-$stmts = [$node];
-$prettyPrinter = new \PhpParser\PrettyPrinter\Standard();
-echo $prettyPrinter->prettyPrint($stmts);
+echo Builder::getPrintedStatements($node);
 echo PHP_EOL;
 
 ```

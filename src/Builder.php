@@ -1,4 +1,5 @@
 <?php
+
 namespace ByteHello\ConditionBuilder;
 
 use Exception;
@@ -12,5 +13,12 @@ class Builder
             throw new ConditionBuilderException('node is null');
         }
         return $node;
+    }
+
+    public static function getPrintedStatements($node)
+    {
+        $stmts = [$node];
+        $prettyPrinter = new \PhpParser\PrettyPrinter\Standard();
+        return $prettyPrinter->prettyPrint($stmts);
     }
 }
